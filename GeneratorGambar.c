@@ -50,56 +50,63 @@ int validateInput(int value, int min, int max) {
 
 int main() {
     int choice, width, height;
+    char continue_prompt;
     
-    printf("\nPilihan Generator Gambar Sederhana:\n");
-    printf("1. Kotak\n");
-    printf("2. Segitiga Siku-Siku\n");
-    printf("3. Belah Ketupat\n");
-    printf("Pilih gambar (1-3): ");
-    scanf("%d", &choice);
+    do {
+        printf("\nPilihan Generator Gambar Sederhana:\n");
+        printf("1. Kotak\n");
+        printf("2. Segitiga Siku-SIku\n");
+        printf("3. Belah Ketupat\n");
+        printf("Pilih gambar (1-3): ");
+        scanf("%d", &choice);
 
-    switch(choice) {
-        case 1: // Square
-            printf("Masukkan lebar (10-100): ");
-            scanf("%d", &width);
-            printf("Masukkan tinggi (5-75): ");
-            scanf("%d", &height);
-            
-            if(!validateInput(width, 10, 100) || !validateInput(height, 5, 75)) {
-                printf("Error: Ukuran tidak valid! Harus dalam rentang yang ditentukan.\n");
+        switch(choice) {
+            case 1: // Square
+                printf("Masukkan lebar (10-100): ");
+                scanf("%d", &width);
+                printf("Masukkan tinggi (5-75): ");
+                scanf("%d", &height);
+                
+                if(!validateInput(width, 10, 100) || !validateInput(height, 5, 75)) {
+                    printf("Error: Ukuran tidak valid! Harus dalam rentang yang ditentukan.\n");
+                    break;
+                }
+                
+                drawSquare(width, height);
                 break;
-            }
-            
-            drawSquare(width, height);
-            break;
 
-        case 2: // Triangle
-            printf("Masukkan tinggi (5-75): ");
-            scanf("%d", &height);
-            
-            if(!validateInput(height, 5, 75)) {
-                printf("Error: Ukuran tidak valid! Harus dalam rentang 5-75.\n");
+            case 2: // Triangle
+                printf("Masukkan tinggi (5-75): ");
+                scanf("%d", &height);
+                
+                if(!validateInput(height, 5, 75)) {
+                    printf("Error: Ukuran tidak valid! Harus dalam rentang 5-75.\n");
+                    break;
+                }
+                
+                drawTriangle(height);
                 break;
-            }
-            
-            drawTriangle(height);
-            break;
 
-        case 3: // Diamond
-            printf("Masukkan ukuran (5-37): "); // Setengah dari max width karena diamond memerlukan 2n+1 width
-            scanf("%d", &height);
-            
-            if(!validateInput(height, 5, 37)) {
-                printf("Error: Ukuran tidak valid! Harus dalam rentang 5-37.\n");
+            case 3: // Diamond
+                printf("Masukkan ukuran (5-37): "); // Setengah dari max width karena diamond memerlukan 2n+1 width
+                scanf("%d", &height);
+                
+                if(!validateInput(height, 5, 37)) {
+                    printf("Error: Ukuran tidak valid! Harus dalam rentang 5-37.\n");
+                    break;
+                }
+                
+                drawDiamond(height);
                 break;
-            }
-            
-            drawDiamond(height);
-            break;
 
-        default:
-            printf("Pilihan tidak valid!\n");
-    }
+            default:
+                printf("Pilihan tidak valid!\n");
+        }
+
+        printf("\nIngin menggambar lagi? (y/n): ");
+        scanf(" %c", &continue_prompt);
+        
+    } while(continue_prompt == 'y' || continue_prompt == 'Y');
 
     return 0;
 }
